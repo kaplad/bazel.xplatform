@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<script>
+  var Module = {
+    onRuntimeInitialized: function () {
+      const text = Module.NativeBridge.sayHello();
+      document.getElementById('text_view').innerText = text;
+    }
+  };
+</script>
+<script src="web_native_bridge.js"></script>
+
+<body>
+  <p id="text_view" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Loading WASM...
+  </p>
+</body>
+
+</html>
