@@ -1,10 +1,18 @@
 load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@rules_xcodeproj//xcodeproj:defs.bzl", "xcodeproj")
 
 #
 #---
 #
+
+xcodeproj(
+    name = "bundle_xcd",
+    project_name = "bundle_xcd",
+    tags = ["manual"],
+    top_level_targets = [":bundle"],
+)
 
 macos_application(
     name = "bundle",
@@ -14,6 +22,7 @@ macos_application(
     infoplists = [":Info.plist"],
     minimum_os_version = "12.0",
     version = ":version",
+    visibility = ["//visibility:public"],
     deps = [":sources"],
 )
 
