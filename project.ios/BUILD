@@ -1,10 +1,18 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 load("@build_bazel_rules_apple//apple:versioning.bzl", "apple_bundle_version")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@rules_xcodeproj//xcodeproj:defs.bzl", "xcodeproj")
 
 #
 #---
 #
+
+xcodeproj(
+    name = "bundle_xcd",
+    project_name = "bundle_xcd",
+    tags = ["manual"],
+    top_level_targets = [":bundle"],
+)
 
 ios_application(
     name = "bundle",
@@ -18,6 +26,7 @@ ios_application(
     launch_storyboard = ":Base.lproj/LaunchScreen.storyboard",
     minimum_os_version = "13.0",
     version = ":version",
+    visibility = ["//visibility:public"],
     deps = [":sources"],
 )
 
